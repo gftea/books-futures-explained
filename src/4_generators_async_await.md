@@ -541,7 +541,7 @@ pub fn main() {
 Wait? What happened to "Hello"? And why did our code segfault?
 
 Turns out that while the example above compiles just fine, we expose consumers
-of this this API to both possible undefined behavior and other memory errors
+of this API to both possible undefined behavior and other memory errors
 while using just safe Rust. This is a big problem!
 
 > I've actually forced the code above to use the nightly version of the compiler.
