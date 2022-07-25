@@ -754,13 +754,13 @@ impl Parker {
         // should resume execution or not.
         let mut resumable = self.0.lock().unwrap();
 
-            // We put this in a loop since there is a chance we'll get woken, but
-            // our flag hasn't changed. If that happens, we simply go back to sleep.
-            while !*resumable {
+        // We put this in a loop since there is a chance we'll get woken, but
+        // our flag hasn't changed. If that happens, we simply go back to sleep.
+        while !*resumable {
 
-                // We sleep until someone notifies us
-                resumable = self.1.wait(resumable).unwrap();
-            }
+            // We sleep until someone notifies us
+            resumable = self.1.wait(resumable).unwrap();
+        }
 
         // We immidiately set the condition to false, so that next time we call `park` we'll
         // go right to sleep.
@@ -824,8 +824,8 @@ fn mywaker_wake(s: &MyWaker) {
 And that's really all there is to it.
 
 > If you checked out the playground link that showcased how park/unpark could [cause subtle
-> problems](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b2343661fe3d271c91c6977ab8e681d0)
-> you can [check out this example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=bebef0f8a8ce6a9d0d32442cc8381595) which shows how our final version avoids this problem.
+> problems](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b2343661fe3d271c91c6977ab8e681d0).
+> You can [check out this example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=bebef0f8a8ce6a9d0d32442cc8381595) which shows how our final version avoids this problem.
 
 The next chapter shows our finished code with this
 improvement which you can explore further if you wish.
